@@ -12,4 +12,4 @@ Ao virar do dia, a contagem reseta. Os dados sobre passos ficarão salvos em uma
 
 Ilustração de exemplo:
 
-<img width="690" height="610" alt="Image" src="https://github.com/user-attachments/assets/065d0f01-0fbc-48d7-b42b-7e307c1819fe" />
+![Imagem da tela inicial do app](imagens/patinhas0.png)
