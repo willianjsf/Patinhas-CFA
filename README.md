@@ -2,14 +2,6 @@
 
 Repositório público para os integrantes do grupo da disciplina de CFA 2025 - EACH USP.
 
-Projeto feito por: 
-
--
--
--
--
-Willian Jefferson Sousa Farias
-
 ## RASCUNHO DA IDEIA
 
 Coleira ou pingente de coleira que mede o nível de atividade física de um pet. Imagino que precisemos de uma placa microcontroladora pequena como a ESP32 (a versão mini), um sensor acelerômetro com giroscópio e uma bateria. 
@@ -21,3 +13,14 @@ Ao virar do dia, a contagem reseta. Os dados sobre passos ficarão salvos em uma
 Ilustração de exemplo:
 
 ![Imagem da tela inicial do app](imagens/patinhas0.png)
+
+## Dúvidas e Ajuda
+
+Ficou interessado pelo projeto e está com alguma dúvida? Ficou perdido ou confuso? Ou quer sugerir alguma melhoria ao projeto?
+
+Incentivamos que você nos procure. **Abra uma Issue** na página de Issues contando seu problema/sugestão.
+
+## Autores
+
+-
+- [Willian Jefferson Sousa Farias](https://github.com/willianjsf)
