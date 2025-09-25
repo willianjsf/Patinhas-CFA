@@ -2,6 +2,14 @@
 
 Repositório público para os integrantes do grupo da disciplina de CFA 2025 - EACH USP.
 
+Projeto feito por: 
+
+--
+--
+--
+--
+Willian Jefferson Sousa Farias
+
 ## RASCUNHO DA IDEIA
 
 Coleira ou pingente de coleira que mede o nível de atividade física de um pet. Imagino que precisemos de uma placa microcontroladora pequena como a ESP32 (a versão mini), um sensor acelerômetro com giroscópio e uma bateria. 
