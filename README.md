@@ -1,6 +1,6 @@
 # 🐾 Projeto Patinhas - Computação Física e Aplicações
 
-Repositório público para os integrantes do grupo da disciplina de CFA 2025 - EACH USP.
+Repositório público para os integrantes do grupo da disciplina de Computação Física e Aplicações (2025) - EACH USP.
 
 ## ✏️ Resumo do projeto
 
