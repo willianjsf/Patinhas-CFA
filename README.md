@@ -36,7 +36,7 @@ Ilustração de exemplo:
 
 - Arduino IDE
 - Bibliotecas:
-  -  MPU9250 (hideakitai)
+  -  [MPU9250 por hideakitai](https://github.com/hideakitai/MPU9250)
   -  (...)
  
 ## 🗣️ Dúvidas e Ajuda
