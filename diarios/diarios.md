@@ -2,7 +2,6 @@
 
 Aqui vamos relatar nossas descobertas ao longo do semestre.
 
----
 ## 📒 Pesquisas individuais
 - [Anotações do Willian](https://docs.google.com/document/d/16pknYUD03wWxq526Kq__X30YFPvVKP2k4w8tPBjolBE/edit?usp=sharing)
 - [Anotações da Stefanie](https://github.com/stepalmeira)
@@ -24,8 +23,6 @@ Este módulo contém um sensor acelerômetro de 3 eixos, um giroscópio de 3 eix
 ## 📱 Aplicativo
 
 ## 🔋 Bateria
-
----
 
 ## 📑 Links e referências
 - [Use of pedometers to measure physical activity in dogs](https://avmajournals.avma.org/view/journals/javma/226/12/javma.2005.226.2010.xml?tab_body=pdf)
