@@ -50,14 +50,16 @@ void setup() {
   
   Serial.println("Configuração e Calibração concluída!");
 
-  // Ponteiro para arquivo
-  FILE *fptr;
+  
 
-  // Cria o arquivo
-  fptr = fopen("passos.txt", "w");
+  // // Ponteiro para arquivo
+  // FILE *fptr;
 
-  // Fecha o arquivo
-  fclose(fptr); 
+  // // Cria o arquivo
+  // fptr = fopen("passos.txt", "w");
+
+  // // Fecha o arquivo
+  // fclose(fptr);
 }
 
 void loop() {
