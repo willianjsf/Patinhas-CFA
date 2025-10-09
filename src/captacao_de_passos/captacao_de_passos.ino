@@ -1,7 +1,16 @@
 #include "MPU9250.h"
 #include "math.h"
+#include <WiFi.h>
 
 MPU9250 mpu;
+
+//Conexão WiFi
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASSWORD";
+
+//Servidor
+const char* serverIP = "192.168.1.100"; // Mudar para o IP atual
+const int serverPort = 5000;
 
 // Variáveis para armazenar os vieses calculados
 float calibratedAccBiasX, calibratedAccBiasY, calibratedAccBiasZ;
@@ -24,6 +33,16 @@ void setup() {
   
   //Inicializa o barramento I2C
   Wire.begin();
+
+  // WiFi.begin(ssid, password);
+  WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(1000);
+        Serial.println("Connectando ao WiFi...");
+      }
+    Serial.println("Connectado");
+    Serial.print("IP: ");
+    Serial.println(WiFi.localIP());
 
   // Pausa de 2 segundos para estabilizar a inicialização do sensor
   delay(2000); 
@@ -62,6 +81,18 @@ void setup() {
   // fclose(fptr);
 }
 
+void sendPost(mensagem) {
+  WiFiClient client;
+  
+  if (client.connect(serverIP, serverPort)) {
+    client.println("POST / HTTP/1.1");
+    client.println("Host: " + String(serverIP) + ":" + String(serverPort));
+    client.println("Content-Length: " + String(mensagem.length()));
+    client.println();  // Empty line after headers
+    client.println(mensagem);  // Your text here
+    }
+}
+
 void loop() {
 
   // Descomentar se precisar ver os valores de aceleração captados em cada um dos eixos
@@ -90,6 +121,7 @@ void loop() {
       Serial.print("Total de passos: ");
       Serial.println(passos);
       momentoDoPassoAnterior = millis(); //Marca o momento em que o passo foi dado
+      sendPost(passos)
     }
 
     delay(100);
