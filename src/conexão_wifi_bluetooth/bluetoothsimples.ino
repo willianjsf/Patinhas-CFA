@@ -1,5 +1,8 @@
 // Código simples para conexão bluetooth do ESP32 -> imprime "Olá do ESP32!" a cada 2s
 
+/* Após conectar o celular com o dispositivo do ESP32, basta baixar o aplicativo “Serial Bluetooth Terminal” e
+conectá-lo ao dispositivo esp32 e, então, aparecerá no terminal a mensagem "Olá do ESP32!" a cada 2 segundos. */
+
 #include "BluetoothSerial.h"
 
 // Verifica se o Bluetooth está devidamente habilitado na configuração do seu projeto
