@@ -46,10 +46,9 @@ Ficou interessado pelo projeto e está com alguma dúvida? Ficou perdido ou conf
 Incentivamos que você nos procure. **Abra uma Issue** na página de Issues contando seu problema/sugestão.
 
 ## 👨‍💻 Autores
-
-- 
--
-- 
+ 
+- [Arthur Hernandes](https://github.com/arthurHernandess)
+- Gabriel Kennuy
 - [Stefanie Palmeira](https://github.com/stepalmeira)
 - [Willian Jefferson Sousa Farias](https://github.com/willianjsf)
 
