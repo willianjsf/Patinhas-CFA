@@ -1,15 +1,20 @@
 #include "MPU9250.h"
 #include "math.h"
 #include <WiFi.h>
+#include <HTTPClient.h>
 
+/*
+IMPORTANTE: pro erro A fatal error occurred: Failed to connect to ESP32: Wrong boot mode detected (0x13)! The chip needs to be in download mode.
+faça: Press and hold Boot button, click EN button, click Upload, release Boot button only when "Connecting...." is displayed.
+*/
 MPU9250 mpu;
 
 //Conexão WiFi
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
+const char* ssid = "";
+const char* password = "";
 
 //Servidor
-const char* serverIP = "192.168.1.100"; // Mudar para o IP atual
+const char* serverIP = "10.83.15.10"; // Mudar para o IP atual
 const int serverPort = 5000;
 
 // Variáveis para armazenar os vieses calculados
@@ -34,15 +39,18 @@ void setup() {
   //Inicializa o barramento I2C
   Wire.begin();
 
-  // WiFi.begin(ssid, password);
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
+
   WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(1000);
-        Serial.println("Connectando ao WiFi...");
-      }
-    Serial.println("Connectado");
-    Serial.print("IP: ");
-    Serial.println(WiFi.localIP());
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(2000);
+    Serial.println(WiFi.status());
+    /* Serial.println("Connectando ao WiFi...");*/
+  }
+  Serial.println("Connectado");
+  Serial.print("IP: ");
+  Serial.println(WiFi.localIP());
 
   // Pausa de 2 segundos para estabilizar a inicialização do sensor
   delay(2000); 
@@ -81,17 +89,35 @@ void setup() {
   // fclose(fptr);
 }
 
-void sendPost(mensagem) {
-  WiFiClient client;
+void sendPost(int mensagem) {
+  if(WiFi.status() == WL_CONNECTED){
+      WiFiClient client;
+      HTTPClient http;
+
+      char URL[100];  // make sure the buffer is large enough
+      sprintf(URL, "http://%s:%d/", serverIP, serverPort);
+      
+      Serial.println(URL);
+      http.begin(URL);
+      /*http.addHeader("Content-Type", "text/plain");*/
+      int httpResponseCode = http.POST("Hello, World!");
+      Serial.println(httpResponseCode);
+
+      http.end();
+  }
+  
+  /*WiFiClient client;
   
   if (client.connect(serverIP, serverPort)) {
+    Serial.println("Conectou no servidor");
     client.println("POST / HTTP/1.1");
     client.println("Host: " + String(serverIP) + ":" + String(serverPort));
-    client.println("Content-Length: " + String(mensagem.length()));
+    client.println("Content-Length: " + String(String(mensagem).length()));
     client.println();  // Empty line after headers
     client.println(mensagem);  // Your text here
-    }
+  }*/
 }
+
 
 void loop() {
 
@@ -121,10 +147,40 @@ void loop() {
       Serial.print("Total de passos: ");
       Serial.println(passos);
       momentoDoPassoAnterior = millis(); //Marca o momento em que o passo foi dado
-      sendPost(passos)
+      sendPost(passos);
     }
 
     delay(100);
   }
   
+} 
+
+/* void loop() {
+  Serial.println("scan start");
+
+  // WiFi.scanNetworks will return the number of networks found
+  int n = WiFi.scanNetworks();
+  Serial.println("scan done");
+  if (n == 0) {
+      Serial.println("no networks found");
+  } else {
+    Serial.print(n);
+    Serial.println(" networks found");
+    for (int i = 0; i < n; ++i) {
+      // Print SSID and RSSI for each network found
+      Serial.print(i + 1);
+      Serial.print(": ");
+      Serial.print(WiFi.SSID(i));
+      Serial.print(" (");
+      Serial.print(WiFi.RSSI(i));
+      Serial.print(")");
+      Serial.println((WiFi.encryptionType(i) == WIFI_AUTH_OPEN)?" ":"*");
+      delay(10);
+    }
+  }
+  Serial.println("");
+
+  // Wait a bit before scanning again
+  delay(5000);
 }
+*/
