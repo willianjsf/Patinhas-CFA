@@ -22,7 +22,7 @@ def ultimo_passo():
     ultimo = linhas[-1]
     match = re.search(r"(\d+(?:\.\d+)?)\s*passos", ultimo)
     if match:
-        return float(match.group(1))
+        return int(match.group(1))
     return 0
 
 @app.route('/', methods=['POST'])
@@ -32,6 +32,11 @@ def handle_post():
     printf(log_entry)
     log.write(log_entry)
     return "OK", 200
+
+@app.route('/', methods=['GET'])
+def handle_get():
+    ultimo = ultimo_passo()
+    return ultimo, 200
 
 if __name__ == '__main__':
     local_ip = get_local_ip()
