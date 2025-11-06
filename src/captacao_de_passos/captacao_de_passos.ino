@@ -10,11 +10,11 @@ faça: Press and hold Boot button, click EN button, click Upload, release Boot b
 MPU9250 mpu;
 
 //Conexão WiFi
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "Redmi Note 13";
+const char* password = "123456789";
 
 //Servidor
-const char* serverIP = "10.83.15.10"; // Mudar para o IP atual
+const char* serverIP = "10.115.69.10"; // Mudar para o IP atual
 const int serverPort = 5000;
 
 // Variáveis para armazenar os vieses calculados
@@ -30,7 +30,10 @@ unsigned long momentoDoPassoAnterior = 0; // Guarda a última vez que um evento 
 float impactoDoPasso = 0.15; // Medido em g
 int tempoEntrePassos = 500; // Medido em milissegundo
 int passos = 0;
-
+int acumuladorPassos = 0;
+unsigned long timerSendPost = 30000;
+int limiteAcumulador = 30;
+unsigned long lastPost = 0;
 
 void setup() {
   //Inicializa a porta serial entre o ESP e o PC a uma taxa de transmissão de 115200 baud
@@ -46,8 +49,8 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(2000);
     Serial.println(WiFi.status());
-    /* Serial.println("Connectando ao WiFi...");*/
   }
+
   Serial.println("Connectado");
   Serial.print("IP: ");
   Serial.println(WiFi.localIP());
@@ -60,7 +63,6 @@ void setup() {
   config.accel_fs_sel = ACCEL_FS_SEL::A2G;  // Faixa do acelerômetro ±2g, aumenta a resolução e é melhor para detectar passos
   config.gyro_fs_sel  = GYRO_FS_SEL::G250DPS; // Faixa do giroscópio ±250°/s, aumenta a precisão para passos
   mpu.setup(0x68, config);  //Inicializa o sensor no endereço 0x68, aplicando as configurações escolhidas
-
 
   // Calibração do acelerômetro + giroscópio (É só deixar o sensor parado)
   mpu.calibrateAccelGyro();
@@ -76,111 +78,52 @@ void setup() {
   mpu.setGyroBias(calibratedGyroBiasX, calibratedGyroBiasY, calibratedGyroBiasZ);
   
   Serial.println("Configuração e Calibração concluída!");
-
-  
-
-  // // Ponteiro para arquivo
-  // FILE *fptr;
-
-  // // Cria o arquivo
-  // fptr = fopen("passos.txt", "w");
-
-  // // Fecha o arquivo
-  // fclose(fptr);
+  lastPost = millis();
 }
 
 void sendPost(int mensagem) {
   if(WiFi.status() == WL_CONNECTED){
-      WiFiClient client;
-      HTTPClient http;
+    WiFiClient client;
+    HTTPClient http;
 
-      char URL[100];  // make sure the buffer is large enough
-      sprintf(URL, "http://%s:%d/", serverIP, serverPort);
-      
-      Serial.println(URL);
-      http.begin(URL);
-      /*http.addHeader("Content-Type", "text/plain");*/
-      int httpResponseCode = http.POST("Hello, World!");
-      Serial.println(httpResponseCode);
+    char URL[100];
+    sprintf(URL, "http://%s:%d/", serverIP, serverPort);
+    
+    Serial.println(URL);
+    http.begin(URL);
+    http.addHeader("Content-Type", "text/plain");
+    String payload = String(mensagem);
+    int httpResponseCode = http.POST(payload);
+    Serial.println(httpResponseCode);
 
-      http.end();
+    http.end();
   }
-  
-  /*WiFiClient client;
-  
-  if (client.connect(serverIP, serverPort)) {
-    Serial.println("Conectou no servidor");
-    client.println("POST / HTTP/1.1");
-    client.println("Host: " + String(serverIP) + ":" + String(serverPort));
-    client.println("Content-Length: " + String(String(mensagem).length()));
-    client.println();  // Empty line after headers
-    client.println(mensagem);  // Your text here
-  }*/
 }
 
-
 void loop() {
-
-  // Descomentar se precisar ver os valores de aceleração captados em cada um dos eixos
-  // if (mpu.update()) {
-  //   Serial.print(mpu.getLinearAccX());
-  //   Serial.print(", ");
-  //   Serial.print(mpu.getLinearAccY());
-  //   Serial.print(", ");
-  //   Serial.println(mpu.getLinearAccZ());
-  //   delay(50);
-  // }
-
-  // PROBLEMA: A aceleração muda se mexermos na angulação do sensor
-
   if (mpu.update()) {
     linearAccX = mpu.getLinearAccX();
     linearAccY = mpu.getLinearAccY();
     linearAccZ = mpu.getLinearAccZ();
 
     A = sqrt(pow(linearAccX, 2) + pow(linearAccY, 2) + pow(linearAccZ, 2));
-    Serial.println(A);
     
-
     if (A > impactoDoPasso && (millis() - momentoDoPassoAnterior) > tempoEntrePassos) {
       passos++;
+      acumuladorPassos++;
       Serial.print("Total de passos: ");
       Serial.println(passos);
-      momentoDoPassoAnterior = millis(); //Marca o momento em que o passo foi dado
-      sendPost(passos);
+      momentoDoPassoAnterior = millis(); // Marca o momento em que o passo foi dado
+      // sendPost(passos);
     }
 
     delay(100);
   }
-  
-} 
 
-/* void loop() {
-  Serial.println("scan start");
-
-  // WiFi.scanNetworks will return the number of networks found
-  int n = WiFi.scanNetworks();
-  Serial.println("scan done");
-  if (n == 0) {
-      Serial.println("no networks found");
-  } else {
-    Serial.print(n);
-    Serial.println(" networks found");
-    for (int i = 0; i < n; ++i) {
-      // Print SSID and RSSI for each network found
-      Serial.print(i + 1);
-      Serial.print(": ");
-      Serial.print(WiFi.SSID(i));
-      Serial.print(" (");
-      Serial.print(WiFi.RSSI(i));
-      Serial.print(")");
-      Serial.println((WiFi.encryptionType(i) == WIFI_AUTH_OPEN)?" ":"*");
-      delay(10);
-    }
+  if( ((millis() - lastPost) > timerSendPost) || (acumuladorPassos >= limiteAcumulador) ){ // ve se ja passou de X segundos desde o ultimo post() ou se o acumulador já juntou Y passos
+    sendPost(acumuladorPassos); // envia quantos passos dados nos ultimos X segundos
+    acumuladorPassos = 0; // zera o acumulador (nao zera o passos total)
+    delay(200);
+    lastPost = millis();
   }
-  Serial.println("");
-
-  // Wait a bit before scanning again
-  delay(5000);
 }
-*/
