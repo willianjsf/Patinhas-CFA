@@ -14,8 +14,8 @@ const char* ssid = "Redmi Note 13";
 const char* password = "123456789";
 
 //Servidor
-const char* serverIP = "10.115.69.10"; // Mudar para o IP atual
-const int serverPort = 5000;
+const char* serverIP = "172.20.183.10"; // Mudar para o IP atual
+const int serverPort = 8080;
 
 // Variáveis para armazenar os vieses calculados
 float calibratedAccBiasX, calibratedAccBiasY, calibratedAccBiasZ;

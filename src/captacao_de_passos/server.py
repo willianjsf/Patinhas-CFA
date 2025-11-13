@@ -1,8 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import socket
 from datetime import datetime
 import re
+from datetime import date
+from zeroconf import Zeroconf, ServiceInfo
+import json
 
 app = Flask(__name__)
 totalPassos = 0
@@ -24,22 +27,44 @@ log.seek(0)
 def ultimo_passo():
     global totalPassos
     return totalPassos
-#     linhas = log.readlines()
-#     ultimo = linhas[-1]
-#     match = re.search(r"(\d+(?:\.\d+)?)\s*passos", ultimo)
-#     if match:
-#         return int(match.group(1))
-#     return 0
+
+def carregar_dados():
+    with open("animais.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+    
+def salvar_dados(dados):
+    with open("animais.json", "w", encoding="utf-8") as f:
+        json.dump(dados, f, ensure_ascii=False, indent=2)
 
 @app.route('/', methods=['POST'])
 def handle_post():
-    global totalPassos
-    tmstp = datetime.now()
+    dados = carregar_dados()
+    pet = dados["pets"][0]
+    hoje = date.today().strftime("%Y-%m-%d")
+
     passosRecentes = request.get_data(as_text=True)
-    totalPassos += int(passosRecentes)
-    log_entry = f"{tmstp.timestamp()} - {passosRecentes} passos \nIP: {request.remote_addr}"
-    print(log_entry)
-    log.write(log_entry)
+    # log_entry = f"{tmstp.timestamp()} - {passosRecentes} passos \nIP: {request.remote_addr}"
+    # print(log_entry)
+
+    diaEncontrado = False
+
+    for item in pet["passos"]:
+        if item["data"] == hoje:
+            diaEncontrado = True
+            passosHoje = item["num_passos"]
+            passosHoje = passosHoje + int(passosRecentes)
+            print(passosHoje)
+            item["num_passos"] = passosHoje
+            salvar_dados(dados)
+
+    if diaEncontrado == False:
+        novoDia = {
+            "num_passos": int(passosRecentes),
+            "data": hoje
+        }
+        dados["pets"][0]["passos"].append(novoDia)
+        salvar_dados(dados)
+
     return "OK", 200
 
 @app.route('/', methods=['GET'])
@@ -48,10 +73,59 @@ def handle_get():
     print(ultimo)
     return ultimo, 200
 
+@app.route('/animalInfo', methods=['GET'])
+def get_animal_info():
+    dados = carregar_dados()
+    print(dados)
+
+    if not dados:
+        return jsonify({"erro": "Banco de dados vazio."}), 400
+
+    return jsonify({
+        "dados": dados["pets"]
+    }), 200
+
+
+@app.route('/passosDia', methods=['GET'])
+def get_passos_dia():
+    dados = carregar_dados()
+    pet = dados["pets"][0]
+
+    dia = request.args.get('dia')
+
+    if not dia:
+        return jsonify({"erro": "Parâmetro 'dia' é obrigatório."}), 400
+    
+    for item in pet["passos"]:
+        if item["data"] == dia:
+            return jsonify({
+                "data": dia,
+                "num_passos": item["num_passos"]
+            }), 200
+
+    # Se não encontrar a data
+    return jsonify({
+        "erro": f"Nenhum registro encontrado para a data {dia}"
+    }), 404
+
 if __name__ == '__main__':
+    port=8080
     local_ip = get_local_ip()
     contagem = ultimo_passo()
-    print(f"Contagem anterior -> {contagem}")
-    print(f"Servidor -> http://{local_ip}:5000")
-    log.write(f"Servidor -> http://{local_ip}:5000")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+
+    zeroconf = Zeroconf()
+    info = ServiceInfo(
+        "_http._tcp.local.",
+        "backend.local._http._tcp.local.",
+        addresses=[socket.inet_aton(local_ip)],
+        port=port,
+        properties={},
+        server="backend.local."
+    )
+    zeroconf.register_service(info)
+
+    log.write(f"Servidor -> http://{local_ip}:" + str(port))
+    
+    print(f" → Endereço: {local_ip}:{port}")
+    print(f" → Servidor DNS-SD: {info.server}")
+    app.run(host='0.0.0.0', port=port)
