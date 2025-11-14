@@ -2,19 +2,24 @@
 #include "math.h"
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <WiFiUdp.h>
 
 /*
 IMPORTANTE: pro erro A fatal error occurred: Failed to connect to ESP32: Wrong boot mode detected (0x13)! The chip needs to be in download mode.
 faça: Press and hold Boot button, click EN button, click Upload, release Boot button only when "Connecting...." is displayed.
 */
 MPU9250 mpu;
+WiFiUDP udp;
 
 //Conexão WiFi
 const char* ssid = "Redmi Note 13";
 const char* password = "123456789";
 
+const int broadcastPort = 50000;
+
 //Servidor
-const char* serverIP = "172.20.183.10"; // Mudar para o IP atual
+bool serverEncontrado = false;
+char serverIP[32] = ""; // Mudar para o IP atual
 const int serverPort = 8080;
 
 // Variáveis para armazenar os vieses calculados
@@ -79,6 +84,34 @@ void setup() {
   
   Serial.println("Configuração e Calibração concluída!");
   lastPost = millis();
+
+  udp.begin(broadcastPort);
+
+  broadcastProcuraServidor();
+}
+
+void broadcastProcuraServidor(){
+  while (!serverEncontrado) {
+    udp.beginPacket(IPAddress(255,255,255,255), broadcastPort);
+    udp.print("DISCOVER_SERVER");
+    udp.endPacket();
+
+    int len = udp.parsePacket();
+    if (len > 0) {
+      char buf[64];
+      udp.read(buf, len);
+      buf[len] = 0;
+
+      if (strncmp(buf, "SERVER_IP:", 10) == 0) {
+        strncpy(serverIP, buf + 10, sizeof(serverIP));
+        serverEncontrado = true;
+
+        Serial.print("Servidor encontrado: ");
+        Serial.println(serverIP);
+      }
+    }
+    delay(2000);
+  }
 }
 
 void sendPost(int mensagem) {

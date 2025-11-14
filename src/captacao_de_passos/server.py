@@ -6,10 +6,13 @@ import re
 from datetime import date
 from zeroconf import Zeroconf, ServiceInfo
 import json
+import threading
 
 app = Flask(__name__)
 totalPassos = 0
 CORS(app)
+
+BROADCAST_PORT = 50000
 
 def get_local_ip(): 
     try:
@@ -23,6 +26,23 @@ def get_local_ip():
 
 log = open("log.txt", "a+", buffering=1)
 log.seek(0)
+
+def broadcast_listener():
+    local_ip = get_local_ip()
+    print(f"Broadcast Listener jogando para o IP {local_ip}")
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    sock.bind(("", BROADCAST_PORT))
+
+    while True:
+        data, addr = sock.recvfrom(1024)
+        msg = data.decode().strip()
+
+        if msg == "DISCOVER_SERVER":
+            resposta = f"SERVER_IP:{local_ip}"
+            sock.sendto(resposta.encode(), addr)
+            print(f"Respondido para {addr}: {resposta}")
 
 def ultimo_passo():
     global totalPassos
@@ -113,19 +133,10 @@ if __name__ == '__main__':
     local_ip = get_local_ip()
     contagem = ultimo_passo()
 
-    zeroconf = Zeroconf()
-    info = ServiceInfo(
-        "_http._tcp.local.",
-        "backend.local._http._tcp.local.",
-        addresses=[socket.inet_aton(local_ip)],
-        port=port,
-        properties={},
-        server="backend.local."
-    )
-    zeroconf.register_service(info)
-
     log.write(f"Servidor -> http://{local_ip}:" + str(port))
     
+    udp_thread = threading.Thread(target=broadcast_listener, daemon=True) # inicia broadcast em thread separada
+    udp_thread.start()
+
     print(f" → Endereço: {local_ip}:{port}")
-    print(f" → Servidor DNS-SD: {info.server}")
     app.run(host='0.0.0.0', port=port)
