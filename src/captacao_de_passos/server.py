@@ -96,7 +96,6 @@ def handle_get():
 @app.route('/animalInfo', methods=['GET'])
 def get_animal_info():
     dados = carregar_dados()
-    print(dados)
 
     if not dados:
         return jsonify({"erro": "Banco de dados vazio."}), 400
