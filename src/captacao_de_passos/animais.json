@@ -2,21 +2,36 @@
   "pets": [
     {
       "nome": "Rex",
-      "tipo": "cachorro",
-      "altura_cm": 50,
-      "peso_kg": 20,
-      "passos_por_dia": 5000,
-      "idade_anos": 4,
-      "cor": "marrom",
+      "pesoKg": 18,
+      "porte": "medio",
+      "idadeAnos": 3,
+      "energia": "media",
+      "castrado": false,
+      "temProblemaSaude": false,
+      "objetivo": "manutencao",
+      "ambienteRuim": false,
+      "cor": "preto e branco",
       "fotoSrc": "https://img.freepik.com/fotos-gratis/cao-de-raca-pura-sendo-bonito-em-um-estudio_23-2149016897.jpg?t=st=1761253585~exp=1761257185~hmac=ec9b32f100ec41aac95a089059a23775eb24988305d588fb95a813bced56070c&w=1060",
       "passos": [
         {
-          "data": "2025-11-12",
-          "num_passos": 2034
+          "data": "2025-11-11",
+          "num_passos": 2309
         },
         {
-          "num_passos": 156,
-          "data": "2025-11-13"
+          "num_passos": 1651,
+          "data": "2025-11-12"
+        },
+        {
+          "data": "2025-11-13",
+          "num_passos": 1235
+        },
+        {
+          "data": "2025-11-14",
+          "num_passos": 1465
+        },
+        {
+          "data": "2025-11-15",
+          "num_passos": 2014
         }
       ]
     }
