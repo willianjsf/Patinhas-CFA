@@ -79,7 +79,7 @@ Para a construção do interior do cachorro de brinquedo, foram selecionados os 
 
 ## Conclusões e Comentários
 
-O Projeto Patinhas atingiu o objetivo de criar um sistema funcional de monitoramento pet.
+O Projeto Patinhas atingiu o objetivo de criar um sistema funcional de monitoramento pet...
 
 ### Comentários
 
