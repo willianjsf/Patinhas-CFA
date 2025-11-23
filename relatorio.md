@@ -31,13 +31,6 @@ A solução propõe um design minimalista e robusto, acoplado a um sistema de so
 - Interface: Disponibilizar os dados para o usuário final.
 
 ## Materiais e Métodos
-PLACEHOLDER
-Explicar como foi feita:
--escolha do esp32
--calculo dos passos
--escolha da bateria
--escolha do flask pro servidor
--escolha da placa q vamos usar
 
 ### Componentes utilizados
 
