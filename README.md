@@ -38,14 +38,6 @@ Ilustração de exemplo:
 - Bibliotecas:
   -  [MPU9250 por hideakitai](https://github.com/hideakitai/MPU9250)
   -  (...)
- 
- ## Tarefas para 16/10:
-
-- [ ] Fazer o cachorrinho andar reto
-- ✅️ Começar o desenvolvimento do app
-  - [ ] Começar o back-end do app
-- ✅️ Arrumar o algoritmo da contagem de passos
-- ✅️ Conectar bateria
   
  
 ## 🗣️ Dúvidas e Ajuda
