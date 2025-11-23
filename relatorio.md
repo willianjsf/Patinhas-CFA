@@ -62,11 +62,12 @@ Para a construção do interior do cachorro de brinquedo, foram selecionados os 
 
 ### App
 
-<colocar as tecnologias usadas e o motivo>
++ colocar as tecnologias usadas e o motivo>
 
 <explicação de forma geral como fez e conectou com o algoritmo do acelerometro>
 
-<colocar como uma pessoa aleatoria pode rodar o servidor com o codigo desse repositorio>
++ como uma pessoa aleatoria pode rodar o servidor com o codigo desse repositorio>
+
 
 ## Resultados
 
