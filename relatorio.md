@@ -45,7 +45,7 @@ Para a construção do pingente, foram selecionados os seguintes componentes:
 | Bateria (xxxx) | 1 | --- |
 | ... | 1 | --- |
 
-+ explicação da passo a passo de criação pingente
++ explicação da passo a passo de criação pingente e conexões
 
 ### Interior do cachorro de teste
 
@@ -58,7 +58,7 @@ Para a construção do interior do cachorro de brinquedo, foram selecionados os 
 | Palitos de sorvete pequenos | 4 |
 | Algodão | 4 bolinhas | 
 
-+ explicação da passo a passo de criação do cahorro
++ explicação da passo a passo de criação do cahorro e conexões
 
 ### App
 
