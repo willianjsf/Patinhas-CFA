@@ -114,6 +114,6 @@ Como melhoria futura, sugere-se a implementação de ... <COLOCAR SUGESTÕES PAR
 ## Integrantes
  
 - [Arthur Hernandes](https://github.com/arthurHernandess)
-- Gabriel Kennuy
+- [Gabriel Kennuy](https://github.com/frosfo)
 - [Stefanie Palmeira](https://github.com/stepalmeira)
 - [Willian Jefferson Sousa Farias](https://github.com/willianjsf)
