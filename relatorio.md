@@ -36,7 +36,7 @@ Para a construção do pingente, foram selecionados os seguintes componentes:
 | --- | --- | --- |
 | Microcontrolador (ESP32-C3 Super Mini com display) | 1 | --- |
 | Acelerômetro (MPU-9250/6500)| 1 |  --- |
-| Bateria (xxxx) | 1 | --- |
+| Bateria Li-po 3.7V 300mAh  | 1 | --- |
 | ... | 1 | --- |
 
 + explicação da passo a passo de criação pingente e conexões
