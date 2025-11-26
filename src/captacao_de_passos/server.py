@@ -24,9 +24,6 @@ def get_local_ip():
     except:
         return "0.0.0.0"
 
-log = open("log.txt", "a+", buffering=1)
-log.seek(0)
-
 def broadcast_listener():
     local_ip = get_local_ip()
     print(f"Broadcast Listener jogando para o IP {local_ip}")
@@ -63,8 +60,6 @@ def handle_post():
     hoje = date.today().strftime("%Y-%m-%d")
 
     passosRecentes = request.get_data(as_text=True)
-    # log_entry = f"{tmstp.timestamp()} - {passosRecentes} passos \nIP: {request.remote_addr}"
-    # print(log_entry)
 
     diaEncontrado = False
 
@@ -131,8 +126,6 @@ if __name__ == '__main__':
     port=8080
     local_ip = get_local_ip()
     contagem = ultimo_passo()
-
-    log.write(f"Servidor -> http://{local_ip}:" + str(port))
     
     udp_thread = threading.Thread(target=broadcast_listener, daemon=True) # inicia broadcast em thread separada
     udp_thread.start()
