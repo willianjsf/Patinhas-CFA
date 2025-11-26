@@ -1,7 +1,3 @@
-## Links para formatação do relatório <APAGAR NO FINAL>
-
-- https://github.com/FNakano/CFA2025-SampleProject
-
 # Projeto Patinhas: monitoramento de atividade para Pets de pequeno porte
 
 ## Introdução
@@ -86,11 +82,24 @@ Para chegar ao resultado da imagem presente na seção de Resultados, siga os pa
 
 ### App
 
-+ colocar as tecnologias usadas e o motivo>
+O aplicativo está disponível neste repositório:
+https://github.com/arthurHernandess/CFA-patinhas-app
 
-<explicação de forma geral como fez e conectou com o algoritmo do acelerometro>
+O backend em python serve como “ponte” entre o hardware e o app — recebe dados do ESP32 (passos), mantém o estado / histórico e disponibiliza uma API para o app consultar. 
+Isso permite que o app apenas consuma os dados sem se preocupar com hardware. Consumindo dados enviados pelo ESP32 e mostrando ao usuário o número de passos do “pet” em tempo quase real
 
-+ como uma pessoa aleatoria pode rodar o servidor com o codigo desse repositorio>
+<+ como uma pessoa aleatora pode rodar o servidor com o codigo desse repositorio>
+
+1. O ESP32 enconrta automáticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O App responde com SERVER_IP:<ip>
+2. O ESP32 detecta passos usando o algoritmo embarcado
+3. O ESP32 acumula os passos por tempo ou quantidade, a cada 30 segundos envia um POST
+4. O servidor backend recebe os POSTs do firmware, armazena os dados (passos) e disponibiliza via rota HTTP para o app cliente.
+5. O app mobile consome essa API, a cada 30 segundos, para obter dados de passos e exibe para o usuário.
+
+Para o desenvolvimento do aplicativo foi utilizado React por sua agilidade, e capacidade de componentização
+O servidor local roda em python usando flask para lidar com requests HTTP, POST para recebimento dos passos do ESP32 e GET para o envio para o APP, e usando json para formatação dos dados
+
+Para utilizar o app e servidor é nescessario utilizar Python para rodar o script server.py em sua maquina local, que deve estar conectada no mesmo wifi do ESP32 (por hora hardcoded no .ino) e do dispotivio que ira rodar o app
 
 
 ## Resultados
