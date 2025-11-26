@@ -34,6 +34,11 @@ Este módulo contém um sensor acelerômetro de 3 eixos, um giroscópio de 3 eix
 ## 🛜 Conexão sem fio
 
 ## 📱 Aplicativo
+O aplicativo foi desenvolvido utilizando React Native com Expo, a partir da seguinte documentação: https://reactnative.dev/
+Link para o repositório contendo a versão final do app: https://github.com/arthurHernandess/CFA-patinhas-app
+
+## ⚙️ Backend
+O Backend foi feito em Python com o uso da biblioteca Flask, permitindo criação de endpoint HTTP. O ESP32 se comunica com o backend enviando os passos do animal a cada 30s, e o aplicativo se comunica também com esse backend, recebendo os passos diários do animal e gerando gráficos e informações úteis ao dono do pet.
 
 ## 🔋 Bateria
 
