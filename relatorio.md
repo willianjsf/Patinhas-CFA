@@ -88,7 +88,7 @@ https://github.com/arthurHernandess/CFA-patinhas-app
 O backend em python serve como “ponte” entre o hardware e o app — recebe dados do ESP32 (passos), mantém o estado / histórico e disponibiliza uma API para o app consultar. 
 Isso permite que o app apenas consuma os dados sem se preocupar com hardware. Consumindo dados enviados pelo ESP32 e mostrando ao usuário o número de passos do “pet” em tempo quase real
 
-1. O ESP32 enconrta automáticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O App responde com SERVER_IP:<ip>
+1. O ESP32 enconrta automáticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O Servidor responde com SERVER_IP:<ip>
 2. O ESP32 detecta passos usando o algoritmo embarcado
 3. O ESP32 acumula os passos por tempo ou quantidade, a cada 30 segundos envia um POST
 4. O servidor backend recebe os POSTs do firmware, armazena os dados (passos) e disponibiliza via rota HTTP para o app cliente.
