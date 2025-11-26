@@ -5,7 +5,7 @@ Aqui vamos relatar nossas descobertas ao longo do semestre.
 ## 📒 Pesquisas individuais
 - [Anotações do Willian](https://docs.google.com/document/d/1L0mPsEgcZPG29M-nSPczp4rMd2Pr4x98OYEAvyfv0Eg/edit?usp=sharing)
 - [Anotações da Stefanie](https://github.com/stepalmeira)
-- [Anotações do Arthur - doc. display do ESP32c3](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)
+- [Anotações do Arthur](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)
 - [Anotações do Gabriel](https://docs.google.com/document/d/1JIy1R8I9HfKGUwXwEe_GVcWvw83TuC-qe8YNm9TS3fU/edit?usp=sharing)
 
 ## 🔧 Componentes
