@@ -8,7 +8,7 @@ Coleira ou pingente de coleira que mede o nível de atividade física de um pet.
 
 Ilustração de exemplo:
 
-![Imagem da tela inicial do app](imagens/patinhas0.png)
+![Imagem da tela inicial do app](Relatorios/imagens/patinhas0.png)
 
 
 ## 🔧 Componentes
