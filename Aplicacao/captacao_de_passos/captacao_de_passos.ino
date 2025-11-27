@@ -48,8 +48,8 @@ float A_filtrado;
 
 // 2. Máquina de Estados
 bool esperandoPico = true;      
-float impactoDoPasso = 1.03;    // Ajuste conforme sensibilidade desejada (1.5 inicialmente)
-float impactoDoRepouso = 1.01;  // Ajuste conforme sensibilidade desejada (0.9 inicialmente)
+float impactoDoPasso = 1.2;    // Ajuste conforme sensibilidade desejada (1.5 inicialmente)
+float impactoDoRepouso = 0.9;  // Ajuste conforme sensibilidade desejada (0.9 inicialmente)
 
 // 3. Controle de Tempo
 unsigned long momentoDoPassoAnterior = 0;  
