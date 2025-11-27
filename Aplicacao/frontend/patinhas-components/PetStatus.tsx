@@ -10,25 +10,67 @@ const PetStatus = (pet:any) => {
   // Obtém a data atual em BRT (UTC-3)
   const hojeBRT = new Date(new Date().getTime() - 3 * 60 * 60 * 1000).toISOString().split("T")[0];
 
+  // useEffect(() => {
+  //   const getPassos = async () => {
+  //     try {
+  //       const ip = useServerIP();
+  //       const response = await fetch("http://" + ip + ":8080/passosDia?dia=" + hojeBRT);
+  //       const data = await response.json();
+  //       if(data.num_passos === undefined)
+  //         setPassos(0);
+  //       else
+  //         setPassos(data.num_passos);
+  //     } catch (error) {
+  //       console.error("Erro ao buscar passos:", error);
+  //       setPassos(0);
+  //     }
+  //   };
+
+  //   getPassos();
+
+  // }, []);
+
   useEffect(() => {
     const getPassos = async () => {
       try {
+        // Adicionando um timestamp na URL para evitar que o navegador use cache antigo
+        const timestamp = new Date().getTime(); 
         const ip = useServerIP();
-        const response = await fetch("http://" + ip + ":8080/passosDia?dia=" + hojeBRT);
+        
+        // Note que adicionei "&t=" + timestamp no final
+        const response = await fetch("http://" + ip + ":8080/passosDia?dia=" + hojeBRT + "&t=" + timestamp);
+        
         const data = await response.json();
-        if(data.num_passos === undefined)
-          setPassos(0);
-        else
-          setPassos(data.num_passos);
+        
+        // Só atualiza o estado se o valor for diferente para economizar processamento
+        if(data.num_passos !== undefined) {
+             setPassos(prevPassos => {
+                 // Se o valor novo for igual ao antigo, retorna o antigo (não renderiza nada)
+                 if (prevPassos === data.num_passos) return prevPassos;
+                 // Se for diferente, atualiza
+                 return data.num_passos;
+             });
+        }
       } catch (error) {
         console.error("Erro ao buscar passos:", error);
-        setPassos(0);
+        // Opcional: não zerar os passos em caso de erro de rede momentâneo
+        // setPassos(0); 
       }
     };
 
+    // 1. Chama imediatamente ao abrir
     getPassos();
 
-  }, []);
+    // 2. Configura um intervalo para chamar a cada 2000 milissegundos (2 segundos)
+    const intervalo = setInterval(() => {
+        getPassos();
+    }, 2000);
+
+    // 3. Limpeza (Importante!): Quando você fecha a tela, para de chamar o servidor
+    return () => clearInterval(intervalo);
+
+  }, []); // Mantém o array vazio aqui
+  
 
   const estimativa = estimarPassosDiarios(pet);
   const passosIdeal = estimativa.estimate;
@@ -128,7 +170,7 @@ const styles = StyleSheet.create({
 
   progressBar: {
     width: 200,
-    height: 12,
+    height: 16,
     backgroundColor: "#EFEFEF",
     borderRadius: 6,
     overflow: "hidden",
@@ -155,13 +197,13 @@ const styles = StyleSheet.create({
 
   passos: {
     fontSize: 36,
-    fontWeight: "700",
+    fontWeight: "900",
     color: "#000",
     marginBottom: 8,
   },
 
   infoBox: {
-    backgroundColor: 'rgba(0, 0, 0, 0.82)',  // fundo escuro com transparência
+    backgroundColor: 'rgba(209, 209, 209, 0.82)',  // fundo escuro com transparência
     padding: 16,
     borderRadius: 16,
     marginVertical: 20,
@@ -175,7 +217,7 @@ const styles = StyleSheet.create({
   },
 
   infoText: {
-    color: '#FFF',
+    color: '#242424ff',
     fontSize: 16,
     marginVertical: 2,
     lineHeight: 22,
@@ -184,7 +226,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: '600',
-    color: '#FFF',
+    color: '#585858ff',
     marginBottom: 10,
     textAlign: 'center',
   },

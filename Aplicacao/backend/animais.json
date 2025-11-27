@@ -1,7 +1,7 @@
 {
   "pets": [
     {
-      "nome": "Rex",
+      "nome": "Snoopy",
       "pesoKg": 18,
       "porte": "medio",
       "idadeAnos": 3,
@@ -11,7 +11,7 @@
       "objetivo": "manutencao",
       "ambienteRuim": false,
       "cor": "preto e branco",
-      "fotoSrc": "https://img.freepik.com/fotos-gratis/cao-de-raca-pura-sendo-bonito-em-um-estudio_23-2149016897.jpg?t=st=1761253585~exp=1761257185~hmac=ec9b32f100ec41aac95a089059a23775eb24988305d588fb95a813bced56070c&w=1060",
+      "fotoSrc": "https://iili.io/fBW370N.md.jpg",
       "passos": [
         {
           "data": "2025-11-11",
@@ -34,12 +34,12 @@
           "num_passos": 2014
         },
         {
-          "data": "2025-11-27",
-          "num_passos": 1102
+          "data": "2025-11-26",
+          "num_passos": 1132
         },
         {
-          "num_passos": 11,
-          "data": "2025-11-26"
+          "data": "2025-11-27",
+          "num_passos": 13
         }
       ]
     }
