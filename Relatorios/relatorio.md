@@ -113,19 +113,34 @@ Para utilizar o app e servidor é nescessario utilizar Python para rodar o scrip
 
 Algumas imagens do processo de montagem do cachorro utilizando Arduino Uno:
 
+![Imagem do corpo do cachorro](imagens/corpo_cachorro.jpeg)
+
+![Imagem do corpo do cachorro e pernas ao lado](imagens/corpo_e_pernas.jpeg)
+
+![Imagem do cahorro dentro da pelúcia](imagens/cachorroP_montado.jpeg)
 
 
 --> imagens reais do app
 
 ## Conclusões e Comentários
 
-O Projeto Patinhas atingiu o objetivo de criar um sistema funcional de monitoramento pet...
+O Projeto Patinhas atingiu o objetivo de criar um sistema funcional de monitoramento da atividade física do Pet através do cálculo da quantidade de passos do Pet.
+
+
 
 ### Comentários
 
+A experiência da realização do projeto foi proveitosa e aprendemos muito em todas as etapas da contrução do projeto.
+
+Em relação à *side quest* de desmontar um cachorro de pelúcia que se movimentava um pouco para frente e dava cambalhotas, demandou mais tempo do que pensávamos demoraria, uma vez que a maior dificuldade foram referentes à fonte de alimentação e fazer o cachorro andar corretamente.
+
+No resultado final ele anda bem pouco e não como gostariámos, acreditamos que em parte seja devido as pernas serem constituídas de palitos retos que não possuem dobraduras para simular um joelho, e outro aspecto seria o revestimento de pelúcia que faz com que ele deslizasse e não conseguisse pegar impulso suficiente para ir para frente.
+
 <COLOCAR **BREVEMENTE** A EXPERIÊNCIA FAZENDO O PROJETO E O QUE FOI MAIS FÁCIL/DIFÍCIL DO QUE IMAGINOU QUE SERIA>
 
-Como melhoria futura, sugere-se a implementação de ... <COLOCAR SUGESTÕES PARA MELHORIAS FUTURAS REFERENTE A CADA PARTE (SE HOUVER): PINGENTE, CACHORRO, APP>
+Como melhoria futura, sugere-se a melhoria/implementação de:
+
+- Melhorar a movimentação das patas do cachorro feito com Arduino Uno para que se movimente corretamente em superfícies lisas e planas, sendo através da criação de "joelhos" ou melhorando o contato da pata com a superficie.
 
 ## Integrantes
  
