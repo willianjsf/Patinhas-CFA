@@ -4,7 +4,7 @@ Repositório público para os integrantes do grupo da disciplina de Computação
 
 ## ✏️ Resumo do projeto
 
-Coleira ou pingente de coleira que mede o nível de atividade física de um pet. A ideia é registrar o número de passos do pet e enviar esses dados a um aplicativo mobile, onde o tutor poderá acompanhar o nível de atividade física do pet durante o dia. Ao virar do dia, a contagem reseta. Os dados sobre passos ficarão salvos em uma base de dados e poderão ser usados para criar gráficos sobre a atividade do pet.
+Acessório de coleira que mede o nível de atividade física de um pet. A ideia é registrar o número de passos do pet e enviar esses dados a um aplicativo mobile, onde o tutor poderá acompanhar o nível de atividade física do pet durante o dia. Ao virar do dia, a contagem reseta. Os dados sobre passos ficarão salvos em uma base de dados e poderão ser usados para criar gráficos sobre a atividade do pet.
 
 Ilustração de exemplo:
 
