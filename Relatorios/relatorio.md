@@ -55,8 +55,8 @@ Para a construção do interior do cachorro de brinquedo, foram utilizados os se
 | Headers normais e 90° | 2 fileiras de 8 e 1 fileira de 8 dobrados | Conectarão aos servos e ao Arduino |
 | Palitos de sorvete pequenos | 4 | Ficam conectados aos servos |
 | Algodão | 4 bolinhas | No fim da perna de palito para melhorar o movimento |
-| Suporte de 4 pilhas | 2 | Fonte de energia para os servos motores |
-| Pilhas AAA de 1,5 V | 8 | Para colocar dentro do suporte de pilhas |
+| Suporte de 4 pilhas | 1 | Fonte de energia para os servos motores |
+| Pilhas AAA de 1,5 V | 4 | Para colocar dentro do suporte de pilhas |
 | Fita dupla face | Menos de 1m | Colar o EVA e os servos ao papelão e um suporte abaixo dos servos |
 | Cola quente | 1 | Colar as pernas dos servos motores aos palitos |
 | Parafusos 8mm | 4 | Conectar as pernas do servos/palitos aos servos |
@@ -71,14 +71,21 @@ Para chegar ao resultado da imagem presente na seção de Resultados, siga os pa
 4. Cole com fita dupla face os 4 servos motores embaixo do papelão, sendo 1 em cada canto e cada um com seu eixo apontando para fora (pois nós conectaremos as pernas depois).
 5. Em uma placa de circuito impresso de tamanho aproximado de 2x2,5 cm solde com headers duas fileiras na horizontal (uma será para 5V que ficará no meio e outra para GND que ficará na parte supeior), essas duas fileiras podem ser 3ª e a 2ª fileira da placa.
 6. Ainda na placa, solde os caminhos verticais (caso eles não estejam conectados) saindo da fileira de headers abaixo da fileira de 5V e indo até o último furo na vertical. Nesses últimos furos da placa coloque uma fileira de headers dobrados 90° para se conectar com os pinos do Arduino.
-7. Conecte a PCI aos pinos 0-7 do Arduino Uno.
+7. Conecte a PCI aos pinos 8-13 do Arduino Uno.
 8. Identifique o nome de cada servo com etiquetas adesivas ao redor das entradas dos servos.
-9. Conecte os servos aos headers da PCI corretamente (fio marrom mais acima e fio amarelo/laranja mais abaixo) aos pinos XXX do Arduino.
+9. Conecte os servos aos headers da PCI corretamente (fio marrom mais acima e fio amarelo/laranja mais abaixo) aos pinos do Arduino (veja no código cachorroArduino/movimentoCachorro quais pernas vão em quais pinos).
 10. Pegue o último pino da fileira de 5V e da fileira de GND e entorte um pouco para fora.
 11. Pegue o suporte de pilhas com as pilhas dentro e solde o final do fio vermelho (descapado) ao pino da fileira e 5V e faça o mesmmo para o fio preto com o pino da fileira de GND (mesma fileira dos fios marrons dos servos).
-12. ...
-    
+12. Cole com fita supla face o suporte de pilhas embaixo dos servos.
+13. Faça um furo em uma ponta do palito e, com cola quente, cole as "perninhas" do servo no palito de modo que os furos fiquem alinhados e "perninha" apontando para o chão.
+14. Parafuse os parufusos nos furos das pernas em cada servo.
+15. Coloque um pouco de algodão na ponta de cada perna e enrole com fita duréx.
 
+Está pronto o esqueleto do seu cachorro!
+
+Caso você queira colocar dentro da pelúcia, só parafuse as pernas depois de colocar o corpo do cachorro dentro da pelúcia (deixe as portas de alimentação para a traseira do cachorro).
+
+Para que o cachorro comece a se mexer, basta alimentar o Arduino Uno com o cabo USB conectado em seu computador.
 
 ### App
 
@@ -88,7 +95,7 @@ https://github.com/arthurHernandess/CFA-patinhas-app
 O backend em python serve como “ponte” entre o hardware e o app — recebe dados do ESP32 (passos), mantém o estado / histórico e disponibiliza uma API para o app consultar. 
 Isso permite que o app apenas consuma os dados sem se preocupar com hardware. Consumindo dados enviados pelo ESP32 e mostrando ao usuário o número de passos do “pet” em tempo quase real
 
-1. O ESP32 enconrta automáticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O Servidor responde com SERVER_IP:<ip>
+1. O ESP32 encontra automaticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O Servidor responde com SERVER_IP:<ip>
 2. O ESP32 detecta passos usando o algoritmo embarcado
 3. O ESP32 acumula os passos por tempo ou quantidade, a cada 30 segundos envia um POST
 4. O servidor backend recebe os POSTs do firmware, armazena os dados (passos) e disponibiliza via rota HTTP para o app cliente.
@@ -104,7 +111,9 @@ Para utilizar o app e servidor é nescessario utilizar Python para rodar o scrip
 
 --> Imagem dos compoenetes soldados na placa
 
---> imagem final do interior do cachorro
+Algumas imagens do processo de montagem do cachorro utilizando Arduino Uno:
+
+
 
 --> imagens reais do app
 
