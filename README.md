@@ -31,9 +31,10 @@ O algoritmo lê aceleração e rotação, filtra ruídos e usa uma máquina de e
 O app (React) consome uma API fornecida por um backend em Python, que funciona como ponte entre o ESP32 e o aplicativo. O ESP32 detecta passos, encontra o servidor automaticamente via UDP Broadcast e envia os dados em POSTs periódicos. O backend (Flask) recebe esses passos, armazena o histórico e disponibiliza os valores via HTTP para o app, que atualiza as informações do pet em quase tempo real.
 Para usar o sistema, basta rodar o server.py localmente (na mesma rede do ESP32 e do celular) e abrir o app do repositório.
 
-<p style="display: flex; justify-content:space-between">
-  <img src="Relatorios/imagens/demo_app.gif" width="45%"/>
-  <img src="Relatorios/imagens/demo_app_2.gif" width="45%" /> 
+<p style="display:flex; justify-content:space-between">
+  <img src="Relatorios/imagens/demo_app_1x.gif" width="32%">
+  <img src="Relatorios/imagens/demo_app_2.png" width="32%">
+  <img src="Relatorios/imagens/demo_app_3.png" width="32%">
 </p>
 
 

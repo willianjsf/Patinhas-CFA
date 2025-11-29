@@ -79,7 +79,7 @@ const PetStatus = (pet:any) => {
     <ScrollView contentContainerStyle={styles.container}>
       
       {
-        Number(passos) < 30 ? 
+        Number(passos) < 100 ? 
           <Text style={[styles.nomeMid, {fontFamily: 'Montserrat_700Bold'}]}>{pet.pet.nome} precisa de atenção!</Text> : 
           <Text style={[styles.nomeHigh, {fontFamily: 'Montserrat_700Bold'}]}>{pet.pet.nome} está indo muito bem!</Text>
       }
@@ -93,10 +93,6 @@ const PetStatus = (pet:any) => {
         source={{ uri: pet.pet.fotoSrc }}
         style={styles.foto}
       />
-{/* 
-      <View style={[styles.progressBar, {borderWidth: 2, borderColor: '#c0c0c0ff'}]}>
-        <View style={[Number(passos) < 40 ? styles.progressFillMid : styles.progressFillHigh, { width: `${(Number(passos) / 30) * 100}%` }]} />
-      </View> */}
 
       <View style={[styles.progressBar, {borderWidth: 2, borderColor: '#c0c0c0ff'}]}>
         <View style={[Number(passos) < 100 ? styles.progressFillMid : styles.progressFillHigh, { width: `${(Number(passos) / 500) * 100}%` }]} />
