@@ -80,8 +80,8 @@ const PetStatus = (pet:any) => {
       
       {
         Number(passos) < 30 ? 
-          <Text style={[styles.nomeMid, { fontFamily: 'Montserrat_400Regular'}]}>{pet.pet.nome} precisa de atenção</Text> : 
-          <Text style={[styles.nomeHigh, {fontFamily: 'Montserrat_400Regular'}]}>{pet.pet.nome} está indo muito bem</Text>
+          <Text style={[styles.nomeMid, {fontFamily: 'Montserrat_700Bold'}]}>{pet.pet.nome} precisa de atenção!</Text> : 
+          <Text style={[styles.nomeHigh, {fontFamily: 'Montserrat_700Bold'}]}>{pet.pet.nome} está indo muito bem!</Text>
       }
 
       <Text style={[styles.subtitulo, { fontFamily: 'Montserrat_400Regular' }]}>
@@ -93,9 +93,14 @@ const PetStatus = (pet:any) => {
         source={{ uri: pet.pet.fotoSrc }}
         style={styles.foto}
       />
-
-      <View style={[styles.progressBar, {borderWidth: 1, borderColor: '#000'}]}>
+{/* 
+      <View style={[styles.progressBar, {borderWidth: 2, borderColor: '#c0c0c0ff'}]}>
         <View style={[Number(passos) < 40 ? styles.progressFillMid : styles.progressFillHigh, { width: `${(Number(passos) / 30) * 100}%` }]} />
+      </View> */}
+
+      <View style={[styles.progressBar, {borderWidth: 2, borderColor: '#c0c0c0ff'}]}>
+        <View style={[Number(passos) < 100 ? styles.progressFillMid : styles.progressFillHigh, { width: `${(Number(passos) / 500) * 100}%` }]} />
+        <View style={[Number(passos) >= 100 ? styles.progressFillHigh : styles.progressFillHigh, { width: `${(Number(passos) / 500) * 100}%` }]} />
       </View>
 
       <Text style={[styles.passos, { fontFamily: 'Montserrat_400Regular' }]}>{passos} passos</Text>
@@ -135,44 +140,46 @@ const PetStatus = (pet:any) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    paddingVertical: 20,
+    paddingVertical: 40,
   },
 
   nomeMid: {
-    fontSize: 26,
-    fontWeight: "700",
-    color: "#FFB800",
+    fontSize: 30,
+    fontWeight: '700',
+    color: "#d9e021",
     textAlign: "center",
     marginBottom: 6,
+    paddingHorizontal: 40,
   },
 
   nomeHigh: {
     fontSize: 26,
     fontWeight: "700",
-    color: "green",
+    color: "#57c448",
     textAlign: "center",
     marginBottom: 6,
+    paddingHorizontal: 40,
   },
 
   subtitulo: {
     fontSize: 16,
-    color: "#555",
+    color: "#999999ff",
     textAlign: "center",
     marginBottom: 20,
   },
 
   foto: {
-    width: 190,
-    height: 190,
-    borderRadius: 90,
-    marginBottom: 18,
+    width: 280,
+    height: 280,
+    borderRadius: 160,
+    marginBottom: 20,
   },
 
   progressBar: {
-    width: 200,
+    width: 260,
     height: 16,
     backgroundColor: "#EFEFEF",
-    borderRadius: 6,
+    borderRadius: 8,
     overflow: "hidden",
     marginBottom: 16,
   },
@@ -191,8 +198,8 @@ const styles = StyleSheet.create({
 
   progressFillHigh: {
     height: "100%",
-    backgroundColor: "green",
-    borderRadius: 6,
+    backgroundColor: "#57c448",
+    borderRadius: 8,
   },
 
   passos: {

@@ -10,21 +10,21 @@ A solução propõe um design minimalista e robusto, acoplado a um sistema de so
 
 ## Objetivos
 
-**Objetivo Geral**
+#### Objetivo Geral
 
 - Desenvolver um sistema completo de IoT (Internet das Coisas) para monitoramento de atividade física de pets.
 
-**Objetivos Específicos**
+#### Objetivos Específicos
 
-- Hardware: Prototipar um acessório resiliente para acoplamento em coleira, contendo os componentes necessários. Além disso, deservolver o interior de um cachorro de brinquedo para testes e apresentação.
+- **Hardware**: Prototipar um acessório resiliente para acoplamento em coleira, contendo os componentes necessários. Além disso, deservolver o interior de um cachorro de brinquedo para testes e apresentação.
 
-- Software: Desenvolver algoritmo para detecção de passos baseado em acelerômetro, filtrando movimentos como balançar a cabeça rapidamente.
+- **Software**: Desenvolver algoritmo para detecção de passos baseado em acelerômetro, filtrando movimentos como balançar a cabeça rapidamente.
 
-- Conectividade: Implementar comunicação Wi-Fi para envio de dados do dispositivo para o servidor local.
+- **Conectividade**: Implementar comunicação Wi-Fi para envio de dados do dispositivo para o servidor local.
 
-- Software/Backend: Criar um webserver (API) para recepção, validação e armazenamento dos dados.
+- **Backend**: Criar um webserver (API) para recepção, validação e armazenamento dos dados.
 
-- Interface: Disponibilizar os dados para o usuário final.
+- **Interface**: Disponibilizar os dados para o usuário final.
 
 ## Materiais e Métodos
 
@@ -181,10 +181,10 @@ Para que o cachorro comece a se mexer, basta alimentar o Arduino Uno com o cabo 
 
 Algumas imagens do processo de montagem do cachorro utilizando Arduino Uno:
 
-<p style="display: flex; justify-content:space-between">
-  <img src="imagens/corpo_cachorro.jpeg" style="width:32%"/>
-  <img src="imagens/corpo_e_pernas.jpeg" style="width:32%"/>
-  <img src="imagens/cachorroP_montado.jpeg" style="width:32%"/> 
+<p style="display: flex; justify-content:space-between; ">
+  <img src="imagens/corpo_cachorro.jpeg" style="width:24%"/>
+  <img src="imagens/corpo_e_pernas.jpeg" style="width:24%"/>
+  <img src="imagens/cachorroP_montado.jpeg" style="width:50%"/> 
 </p>
 
 

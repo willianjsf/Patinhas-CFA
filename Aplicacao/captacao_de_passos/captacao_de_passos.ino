@@ -9,8 +9,8 @@
 
   // ========= CONFIGURAÇÕES DE REDE =========
   WiFiUDP udp;
-  const char* ssid = "_esp"; 
-  const char* password = "esp32c3mini";
+  const char* ssid = "Jeane"; 
+  const char* password = "tinhotinho7951";
 
   const int broadcastPort = 50000;
 

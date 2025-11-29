@@ -6,7 +6,6 @@ Repositório público para apresentação do projeto desenvolvido por alunos do 
 
 Acessório de coleira que conta os passos do pet e envia essas informações para um app mobile. O tutor acompanha a atividade física diária do animal, com a contagem sendo reiniciada a cada dia. Os dados ficam armazenados em uma base para geração de gráficos e histórico de atividade.
 
-
 ![Capa](Relatorios/imagens/capa.png)
 
 
@@ -31,6 +30,11 @@ O algoritmo lê aceleração e rotação, filtra ruídos e usa uma máquina de e
 ## 📱 Aplicativo mobile
 O app (React) consome uma API fornecida por um backend em Python, que funciona como ponte entre o ESP32 e o aplicativo. O ESP32 detecta passos, encontra o servidor automaticamente via UDP Broadcast e envia os dados em POSTs periódicos. O backend (Flask) recebe esses passos, armazena o histórico e disponibiliza os valores via HTTP para o app, que atualiza as informações do pet em quase tempo real.
 Para usar o sistema, basta rodar o server.py localmente (na mesma rede do ESP32 e do celular) e abrir o app do repositório.
+
+<p style="display: flex; justify-content:space-between">
+  <img src="Relatorios/imagens/demo_app.gif" width="45%"/>
+  <img src="Relatorios/imagens/demo_app_2.gif" width="45%" /> 
+</p>
 
 
 ## 📦 Dependências de software

@@ -2,11 +2,11 @@
   "pets": [
     {
       "nome": "Snoopy",
-      "pesoKg": 18,
-      "porte": "medio",
-      "idadeAnos": 3,
+      "pesoKg": 10,
+      "porte": "pequeno",
+      "idadeAnos": 5,
       "energia": "media",
-      "castrado": false,
+      "castrado": true,
       "temProblemaSaude": false,
       "objetivo": "manutencao",
       "ambienteRuim": false,
@@ -40,6 +40,10 @@
         {
           "data": "2025-11-27",
           "num_passos": 39
+        },
+        {
+          "num_passos": 135,
+          "data": "2025-11-29"
         }
       ]
     }
