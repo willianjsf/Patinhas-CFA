@@ -32,9 +32,8 @@ O app (React) consome uma API fornecida por um backend em Python, que funciona c
 Para usar o sistema, basta rodar o server.py localmente (na mesma rede do ESP32 e do celular) e abrir o app do repositório.
 
 <p style="display:flex; justify-content:space-between">
-  <img src="Relatorios/imagens/demo_app_1x.gif" width="32%">
-  <img src="Relatorios/imagens/demo_app_2.png" width="32%">
-  <img src="Relatorios/imagens/demo_app_3.png" width="32%">
+  <img src="Relatorios/imagens/demo_app_1x.gif" width="45%">
+  <img src="Relatorios/imagens/demo_app_2.png" width="45%">
 </p>
 
 

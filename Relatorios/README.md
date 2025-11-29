@@ -110,6 +110,12 @@ O servidor local roda em python usando flask para lidar com requests HTTP, POST 
 
 Para utilizar o app e servidor é nescessario utilizar Python para rodar o script server.py em sua maquina local, que deve estar conectada no mesmo wifi do ESP32 (por hora hardcoded no .ino) e do dispotivio que ira rodar o app.
 
+<p style="display:flex; justify-content:space-between">
+  <img src="imagens/demo_app_1x.gif" width="32%">
+  <img src="imagens/demo_app_2.png" width="32%">
+  <img src="imagens/demo_app_3.png" width="32%">
+</p>
+
 
 ## 📜 Nossa *SideQuest*: Construindo um cachorrinho que anda (para testes)
 
