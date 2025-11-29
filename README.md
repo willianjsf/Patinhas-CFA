@@ -69,7 +69,7 @@ Para usar o sistema, basta rodar o server.py localmente (na mesma rede do ESP32 
 
 ## 🚀 Demonstração
 ![Imagem da tela inicial do app](Relatorios/imagens/teste_real.gif)
-
+<sup>Snoopy aprovou o projeto 👍️</sup>
  
 ## 🗣️ Dúvidas e Ajuda
 
