@@ -25,22 +25,8 @@ Acessório de coleira que conta os passos do pet e envia essas informações par
 
 ##  🐕‍🦺 Como o algoritmo detecta passos
 
-1. ESP32 faz a leitura de sensores
-    - Lê aceleração nos 3 eixos e calcula sua magnitude
-    - Lê também o giroscópio para detectar rotações bruscas
+O algoritmo lê aceleração e rotação, filtra ruídos e usa uma máquina de estados para identificar um padrão “pico → vale”, que representa um passo. Movimentos bruscos são ignorados usando o giroscópio. Quando um passo é confirmado, ele é contado e enviado ao servidor, enquanto o display mostra o total.
 
-2. A magnitude da aceleração passa por um filtro de média movel que suaviza ruídos e vibrações rápidas
-   
-3. Detecção de rotação: Se o pet faz uma movimentação muito brusca (rotação alta), o algoritmo entra em cooldown e ignora possíveis “falsos passos”
-
-4. Máquina de estados para detectar passos:
-    - O algoritmo procura primeiro um pico de aceleração (indicando o início do passo)
-    - Depois espera a volta ao nível de repouso (vale), confirmando que o passo foi completo
-    - Também verifica tempo mínimo entre passos e timeout para evitar falsos positivos
-
-5. Quando um passo é confirmado, incrementa o contador e envia um POST para o servidor com o valor 1
-
-6. O número total de passos é atualizado no display do ESP32
 
 ## 📱 Aplicativo mobile
 O app (React) consome uma API fornecida por um backend em Python, que funciona como ponte entre o ESP32 e o aplicativo. O ESP32 detecta passos, encontra o servidor automaticamente via UDP Broadcast e envia os dados em POSTs periódicos. O backend (Flask) recebe esses passos, armazena o histórico e disponibiliza os valores via HTTP para o app, que atualiza as informações do pet em quase tempo real.

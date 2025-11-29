@@ -62,6 +62,28 @@ Para proteger o circuito, o colocamos em um case e adicionamos uma pequena faixa
 
 O código utilizado no ESP32C3 está em [Aplicacao/captacao_de_passos](../Aplicacao/captacao_de_passos/captacao_de_passos.ino)
 
+## 🐾 Algoritmo de detecção de passos
+Um dos nosso primeiros desafios foi o de encontrar uma biblioteca compatível com o módulo acelerômetro MPU-9250. Depois de explorar algumas bibliotecas, encontramos a [MPU9250 de hideakitai no GitHub](https://github.com/hideakitai/MPU9250) e ela nos serviu perfeitamente para a visualizarmos os valores de aceleração e inclinação no monitor serial do Arduino IDE e a partir daí, pensarmos um algoritmo de detecção de passos.
+
+Depois de alguns testes, nosso algoritmo adquiriu a seguinte cara:
+
+1. ESP32 faz a leitura de sensores
+    - Lê aceleração nos 3 eixos e calcula sua magnitude
+    - Lê também o giroscópio para detectar rotações bruscas
+
+2. A magnitude da aceleração passa por um filtro de média movel que suaviza ruídos e vibrações rápidas
+   
+3. Detecção de rotação: Se o pet faz uma movimentação muito brusca (rotação alta), o algoritmo entra em cooldown e ignora possíveis “falsos passos”
+
+4. Máquina de estados para detectar passos:
+    - O algoritmo procura primeiro um pico de aceleração (indicando o início do passo)
+    - Depois espera a volta ao nível de repouso (vale), confirmando que o passo foi completo
+    - Também verifica tempo mínimo entre passos e timeout para evitar falsos positivos
+
+5. Quando um passo é confirmado, incrementa o contador e envia um POST para o servidor com o valor 1
+
+6. O número total de passos é atualizado no display do ESP32
+
 ## ⚙️ Backend
 O Backend foi feito em Python com o uso da biblioteca Flask, permitindo criação de endpoint HTTP. O ESP32 se comunica com o backend enviando os passos do animal a cada 30s, e o aplicativo se comunica também com esse backend, recebendo os passos diários do animal e gerando gráficos e informações úteis ao dono do pet.  
 [Documentação do desenvolvimento do backend](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)  
