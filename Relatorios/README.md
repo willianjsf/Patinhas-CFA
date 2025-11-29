@@ -183,8 +183,6 @@ Para que o cachorro comece a se mexer, basta alimentar o Arduino Uno com o cabo 
 
 #### Resultados
 
---> Imagem dos compoenetes soldados na placa
-
 Algumas imagens do processo de montagem do cachorro utilizando Arduino Uno:
 
 <p style="display: flex; justify-content:space-between; ">
@@ -197,8 +195,6 @@ Algumas imagens do processo de montagem do cachorro utilizando Arduino Uno:
 ## ✏️ Conclusões e Comentários
 
 O Projeto Patinhas atingiu o objetivo de criar um sistema funcional de monitoramento da atividade física do Pet através do cálculo da quantidade de passos do Pet.
-
-
 
 ### Comentários
 
