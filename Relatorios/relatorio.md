@@ -28,7 +28,7 @@ A solução propõe um design minimalista e robusto, acoplado a um sistema de so
 
 ## Materiais e Métodos
 
-### Pingente
+### Dispositivo físico
 
 Para a construção do pingente, foram selecionados os seguintes componentes:
 
@@ -42,6 +42,9 @@ Para a construção do pingente, foram selecionados os seguintes componentes:
 + explicação da passo a passo de criação pingente e conexões
 
 O código utilizado no ESP32C3 Super Mini está em Aplicacao/captacao_de_passos ou https://github.com/willianjsf/Patinhas-CFA/tree/main/Aplicacao/captacao_de_passos.
+
+![Case](imagens/demonstracao_case.gif)
+
 
 ### Interior do cachorro de teste
 

@@ -21,10 +21,6 @@
 
   // ========= VARIÁVEIS DE ENVIO =========
   unsigned long lastPost = 0;
-  // int acumuladorPassos = 0;
-  // // Envia se passar 30 segundos OU acumular 30 passos
-  // const unsigned long timerSendPost = 30000; 
-  // const int limiteAcumulador = 30;
 
   // ========= CONFIGURAÇÕES DO SENSOR =========
   MPU9250 mpu; // Declarado apenas uma vez agora

@@ -21,7 +21,6 @@ Acessório de coleira que conta os passos do pet e envia essas informações par
 <sup>Obs.: A bateria, o módulo de carregamento e a case foram reciclados de uma caixinha carregadora de fones de ouvido bluetooth</sup>
 
 ![Circuito](Relatorios/imagens/circuito_resultado.png)
-![Circuito](Relatorios/imagens/demonstracao_case.gif)
 
 
 ##  🐕‍🦺 Como o algoritmo detecta passos
