@@ -1,10 +1,10 @@
-# Projeto Patinhas: monitoramento de atividade para Pets de pequeno porte
+# 📝 Relatório de aprendizado
 
 ## Introdução
 
 No cenário imobiliário atual, a verticalização das cidades tornou a vida em apartamentos mais comum do que em casas com quintais. Nesse contexto, a adoção de animais de estimação de pequeno porte tornou-se a norma. Entretanto, a restrição de espaço físico pode levar esses animais a desenvolverem um estilo de vida sedentário, condição que muitas vezes não é observada pelos tutores até que cause problemas de saúde visíveis, como obesidade, problemas articulares ou cardiovasculares.
 
-Através da coleta de dados de movimentação (passometria) do animal, é possível transformar a percepção subjetiva do dono em dados objetivos. O "Projeto Patinhas" visa preencher essa lacuna oferecendo uma solução para monitorar a saúde física do pet.
+Através da coleta de dados de movimentação (passometria) do animal, é possível transformar a percepção subjetiva do dono em dados objetivos. O **Projeto Patinhas** visa preencher essa lacuna oferecendo uma solução para monitorar a saúde física do pet.
 
 A solução propõe um design minimalista e robusto, acoplado a um sistema de software que processa o movimento em "passos" e centraliza as informações em uma interface web acessível.
 
@@ -16,9 +16,9 @@ A solução propõe um design minimalista e robusto, acoplado a um sistema de so
 
 **Objetivos Específicos**
 
-- Hardware: Prototipar um "pingente" resiliente para acoplamento em coleira, contendo os componentes necessários. Além disso, deservolver o interior de um cachorro de brinquedo para testes e apresentação.
+- Hardware: Prototipar um acessório resiliente para acoplamento em coleira, contendo os componentes necessários. Além disso, deservolver o interior de um cachorro de brinquedo para testes e apresentação.
 
-- Firmware: Desenvolver algoritmo para detecção de passos baseado em acelerômetro, filtrando movimentos como balançar a cabeça rapidamente.
+- Software: Desenvolver algoritmo para detecção de passos baseado em acelerômetro, filtrando movimentos como balançar a cabeça rapidamente.
 
 - Conectividade: Implementar comunicação Wi-Fi para envio de dados do dispositivo para o servidor local.
 
@@ -28,25 +28,80 @@ A solução propõe um design minimalista e robusto, acoplado a um sistema de so
 
 ## Materiais e Métodos
 
-### Dispositivo físico
+### 🪛 Hardware
 
-Para a construção do pingente, foram selecionados os seguintes componentes:
+Para a construção do dispositivo físico de captação de passos, foram selecionados os seguintes componentes:
 
 | Nome | Quantidade | Motivo da escolha |
 | --- | --- | --- |
-| Microcontrolador (ESP32-C3 Super Mini com display) | 1 | --- |
-| Acelerômetro (MPU-9250/6500)| 1 |  --- |
-| Bateria Li-po 3.7V 300mAh  | 1 | --- |
-| ... | 1 | --- |
+| Microcontrolador (ESP32-C3 Super Mini com display) | 1 | Processar os dados do acelerômetro e comunicar-se com o servidor via WI-FI | 
+| Acelerômetro (MPU-9250/6500)| 1 |  Captar dados sobre aceleração e inclinação|
+| Bateria Li-po 3.7V 300mAh  | 1 | Fornecer alimentação ao ESP32 |
+| Módulo de carregamento para bateria Li-po | 1 | Proteção e recarregamento da bateria |
+| Case de proteção c/ velcro | 1 | Proteção do circuito e acoplamento na coleira |
+| Placa de circuito universal | 1 | Soldar todos os componentes juntos |
+| Fios condutores | alguns | Conectar as saídas dos componentes na placa de circuito |
 
-+ explicação da passo a passo de criação pingente e conexões
+<sup>Obs.: A bateria, o módulo de carregamento e a case foram reciclados de uma caixinha carregadora de fones de ouvido bluetooth</sup>
 
-O código utilizado no ESP32C3 Super Mini está em Aplicacao/captacao_de_passos ou https://github.com/willianjsf/Patinhas-CFA/tree/main/Aplicacao/captacao_de_passos.
+Fizemos as seguintes conexões entre os componentes:
+![Circuito](imagens/circuito.png)
 
+Alguns ângulos do dispositivo já soldado:
+<p style="display: flex; justify-content:space-between">
+  <img src="imagens/angulo_1.jpeg" width="32%"/>
+  <img src="imagens/angulo_2.jpeg" width="32%" />
+  <img src="imagens/angulo_3.jpeg" width="32%" /> 
+</p>
+<sup>(Obs: foram soldados pinos fêmea na placa, permitindo a troca e reutilização do microcontrolador, acelerômetro e fonte de alimentação)</sup>
+
+Para proteger o circuito, o colocamos em um case e adicionamos uma pequena faixa de velcro, permitindo acoplamento a uma coleira:
 ![Case](imagens/demonstracao_case.gif)
 
 
-### Interior do cachorro de teste
+O código utilizado no ESP32C3 está em [Aplicacao/captacao_de_passos](../Aplicacao/captacao_de_passos/captacao_de_passos.ino)
+
+## ⚙️ Backend
+O Backend foi feito em Python com o uso da biblioteca Flask, permitindo criação de endpoint HTTP. O ESP32 se comunica com o backend enviando os passos do animal a cada 30s, e o aplicativo se comunica também com esse backend, recebendo os passos diários do animal e gerando gráficos e informações úteis ao dono do pet.  
+[Documentação do desenvolvimento do backend](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)  
+
+
+## 📱 Aplicativo mobile
+
+O aplicativo foi desenvolvido utilizando React Native com Expo, a partir da seguinte documentação: https://reactnative.dev/  
+[Repositório contendo a versão final do app](https://github.com/arthurHernandess/CFA-patinhas-app)  
+[Documentação do desenvolvimento do aplicativo](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)
+
+
+O backend em Python serve como “ponte” entre o hardware e o app — recebe dados do ESP32 (passos), mantém o estado / histórico e disponibiliza uma API para o app consultar. 
+Isso permite que o app apenas consuma os dados sem se preocupar com hardware. Consumindo dados enviados pelo ESP32 e mostrando ao usuário o número de passos do “pet” em tempo quase real
+
+1. O ESP32 encontra automaticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O Servidor responde com SERVER_IP:<ip>
+2. O ESP32 detecta passos usando o algoritmo embarcado
+3. O ESP32 acumula os passos por tempo ou quantidade, a cada 30 segundos envia um POST
+4. O servidor backend recebe os POSTs do firmware, armazena os dados (passos) e disponibiliza via rota HTTP para o app cliente.
+5. O app mobile consome essa API, a cada 30 segundos, para obter dados de passos e exibe para o usuário.
+
+Para o desenvolvimento do aplicativo foi utilizado React por sua agilidade, e capacidade de componentização
+O servidor local roda em python usando flask para lidar com requests HTTP, POST para recebimento dos passos do ESP32 e GET para o envio para o APP, e usando json para formatação dos dados.
+
+Para utilizar o app e servidor é nescessario utilizar Python para rodar o script server.py em sua maquina local, que deve estar conectada no mesmo wifi do ESP32 (por hora hardcoded no .ino) e do dispotivio que ira rodar o app.
+
+
+## 📜 Nossa *SideQuest*: Construindo um cachorrinho que anda (para testes)
+
+Ao longo da disciplina ganhamos do professor um cachorrinho de brinquedo (obrigada, Nakano! :)) para testarmos nosso projeto. Entretanto, o brinquedo era programado para dar alguns passos e logo depois dar uma pirueta, o que não nos permitia testar o contador de passos adequadamente. Então, movidos pelo interesse de explorar outros componentes eletrônicos, nos propusemos a fazer modificações no brinquedo.
+
+![Cachorrinho](imagens/cachorrinho.jpeg)
+
+### Tentativa #1: Construir um esqueleto com palitos de picolé movimentado por um único motor DC
+Seguindo [esse tutorial no Youtube](https://www.youtube.com/shorts/SprH83cyU1A) montamos um esqueleto de quadrúpede andante usando um motor DC, suporte de pilha LilyPad, palitos de picolé, papelão, pequenos parafusos e porcas. Desistimos da ideia depois de alguns testes pois os desajustes mecânicos desequilibravam o esqueleto constantemente.  Infelizmente, esquecemos de registrar fotos deste protótipo :,(. Mas o seu movimento era bastante parecido com este:
+![Cachorrinho](imagens/tentativa_1_cachorro.gif)
+ 
+### Tentativa #2: Construir um esqueleto com palitos de picolé movimentado por 4 servo motores
+Nossa segunda tentativa foi baseada [neste tutorial no Youtube](https://www.youtube.com/watch?v=KCTVP1tMOPA). 
+
+#### Interior do cachorro de teste
 
 Para a construção do interior do cachorro de brinquedo, foram utilizados os seguintes componentes:
 
@@ -94,42 +149,22 @@ O código utilizado para que a estrutura do cachorro se mexa está presente em: 
 
 Para que o cachorro comece a se mexer, basta alimentar o Arduino Uno com o cabo USB conectado em seu computador e ligar o suporte de pilhas.
 
-### App
-
-O aplicativo está disponível neste repositório:
-https://github.com/arthurHernandess/CFA-patinhas-app
-
-O backend em python serve como “ponte” entre o hardware e o app — recebe dados do ESP32 (passos), mantém o estado / histórico e disponibiliza uma API para o app consultar. 
-Isso permite que o app apenas consuma os dados sem se preocupar com hardware. Consumindo dados enviados pelo ESP32 e mostrando ao usuário o número de passos do “pet” em tempo quase real
-
-1. O ESP32 encontra automaticamente o servidor na inicialização (UDP Broadcast) --> O ESP envia DISCOVER_SERVER para a rede. O Servidor responde com SERVER_IP:<ip>
-2. O ESP32 detecta passos usando o algoritmo embarcado
-3. O ESP32 acumula os passos por tempo ou quantidade, a cada 30 segundos envia um POST
-4. O servidor backend recebe os POSTs do firmware, armazena os dados (passos) e disponibiliza via rota HTTP para o app cliente.
-5. O app mobile consome essa API, a cada 30 segundos, para obter dados de passos e exibe para o usuário.
-
-Para o desenvolvimento do aplicativo foi utilizado React por sua agilidade, e capacidade de componentização
-O servidor local roda em python usando flask para lidar com requests HTTP, POST para recebimento dos passos do ESP32 e GET para o envio para o APP, e usando json para formatação dos dados
-
-Para utilizar o app e servidor é nescessario utilizar Python para rodar o script server.py em sua maquina local, que deve estar conectada no mesmo wifi do ESP32 (por hora hardcoded no .ino) e do dispotivio que ira rodar o app
 
 
-## Resultados
+#### Resultados
 
 --> Imagem dos compoenetes soldados na placa
 
 Algumas imagens do processo de montagem do cachorro utilizando Arduino Uno:
 
-![Imagem do corpo do cachorro](imagens/corpo_cachorro.jpeg)
+<p style="display: flex; justify-content:space-between">
+  <img src="imagens/corpo_cachorro.jpeg" style="width:32%"/>
+  <img src="imagens/corpo_e_pernas.jpeg" style="width:32%"/>
+  <img src="imagens/cachorroP_montado.jpeg" style="width:32%"/> 
+</p>
 
-![Imagem do corpo do cachorro e pernas ao lado](imagens/corpo_e_pernas.jpeg)
 
-![Imagem do cahorro dentro da pelúcia](imagens/cachorroP_montado.jpeg)
-
-
---> imagens reais do app
-
-## Conclusões e Comentários
+## ✏️ Conclusões e Comentários
 
 O Projeto Patinhas atingiu o objetivo de criar um sistema funcional de monitoramento da atividade física do Pet através do cálculo da quantidade de passos do Pet.
 
@@ -147,9 +182,19 @@ Como melhoria futura, sugere-se a melhoria/implementação de:
 
 - Melhorar a movimentação das patas do cachorro feito com Arduino Uno para que se movimente corretamente em superfícies lisas e planas, sendo através da criação de "joelhos" ou melhorando o contato da pata com a superficie.
 
-## Integrantes
+## 📒 Pesquisas individuais
+- [Anotações do Willian](https://docs.google.com/document/d/1L0mPsEgcZPG29M-nSPczp4rMd2Pr4x98OYEAvyfv0Eg/edit?usp=sharing)
+- [Anotações da Stefanie](https://github.com/stepalmeira)
+- [Anotações do Arthur](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)
+- [Anotações do Gabriel](https://docs.google.com/document/d/1JIy1R8I9HfKGUwXwEe_GVcWvw83TuC-qe8YNm9TS3fU/edit?usp=sharing)
+
+## 👨‍💻 Integrantes
  
 - [Arthur Hernandes](https://github.com/arthurHernandess)
 - [Gabriel Kennuy](https://github.com/frosfo)
 - [Stefanie Palmeira](https://github.com/stepalmeira)
 - [Willian Jefferson Sousa Farias](https://github.com/willianjsf)
+
+## 📑 Links e referências
+- [Use of pedometers to measure physical activity in dogs](https://avmajournals.avma.org/view/journals/javma/226/12/javma.2005.226.2010.xml?tab_body=pdf)
+- [ESP32-C3 0.42 OLED - Kevin's Blog](https://emalliab.wordpress.com/2025/02/12/esp32-c3-0-42-oled/)
