@@ -56,6 +56,7 @@ Alguns ângulos do dispositivo já soldado:
 <sup>(Obs: foram soldados pinos fêmea na placa, permitindo a troca e reutilização do microcontrolador, acelerômetro e fonte de alimentação)</sup>
 
 Para proteger o circuito, o colocamos em um case e adicionamos uma pequena faixa de velcro, permitindo acoplamento a uma coleira:
+
 ![Case](imagens/demonstracao_case.gif)
 
 
@@ -90,12 +91,13 @@ Para utilizar o app e servidor é nescessario utilizar Python para rodar o scrip
 
 ## 📜 Nossa *SideQuest*: Construindo um cachorrinho que anda (para testes)
 
-Ao longo da disciplina ganhamos do professor um cachorrinho de brinquedo (obrigada, Nakano! :)) para testarmos nosso projeto. Entretanto, o brinquedo era programado para dar alguns passos e logo depois dar uma pirueta, o que não nos permitia testar o contador de passos adequadamente. Então, movidos pelo interesse de explorar outros componentes eletrônicos, nos propusemos a fazer modificações no brinquedo.
+Ao longo da disciplina ganhamos do professor um cachorrinho de brinquedo (obrigada, Nakano! 😁) para testarmos nosso projeto. Entretanto, o brinquedo era programado para dar alguns passos e logo depois dar uma pirueta, o que não nos permitia testar o contador de passos adequadamente. Então, movidos pelo interesse de explorar outros componentes eletrônicos, nos propusemos a fazer modificações no brinquedo.
 
 ![Cachorrinho](imagens/cachorrinho.jpeg)
 
 ### Tentativa #1: Construir um esqueleto com palitos de picolé movimentado por um único motor DC
-Seguindo [esse tutorial no Youtube](https://www.youtube.com/shorts/SprH83cyU1A) montamos um esqueleto de quadrúpede andante usando um motor DC, suporte de pilha LilyPad, palitos de picolé, papelão, pequenos parafusos e porcas. Desistimos da ideia depois de alguns testes pois os desajustes mecânicos desequilibravam o esqueleto constantemente.  Infelizmente, esquecemos de registrar fotos deste protótipo :,(. Mas o seu movimento era bastante parecido com este:
+Seguindo [esse tutorial no Youtube](https://www.youtube.com/shorts/SprH83cyU1A) montamos um esqueleto de quadrúpede andante usando um motor DC, suporte de pilha LilyPad, palitos de picolé, papelão, pequenos parafusos e porcas. Desistimos da ideia depois de alguns testes pois os desajustes mecânicos desequilibravam o esqueleto constantemente.  Infelizmente, esquecemos de registrar fotos deste protótipo 😢. Mas o seu movimento era bastante parecido com este:
+
 ![Cachorrinho](imagens/tentativa_1_cachorro.gif)
  
 ### Tentativa #2: Construir um esqueleto com palitos de picolé movimentado por 4 servo motores
