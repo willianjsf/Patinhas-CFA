@@ -60,8 +60,6 @@ Para proteger o circuito, o colocamos em um case e adicionamos uma pequena faixa
 ![Case](imagens/demonstracao_case.gif)
 
 
-O código utilizado no ESP32C3 está em [Aplicacao/captacao_de_passos](../Aplicacao/captacao_de_passos/captacao_de_passos.ino)
-
 ## 🐾 Algoritmo de detecção de passos
 Um dos nosso primeiros desafios foi o de encontrar uma biblioteca compatível com o módulo acelerômetro MPU-9250. Depois de explorar algumas bibliotecas, encontramos a [MPU9250 de hideakitai no GitHub](https://github.com/hideakitai/MPU9250) e ela nos serviu perfeitamente para a visualizarmos os valores de aceleração e inclinação no monitor serial do Arduino IDE e a partir daí, pensarmos um algoritmo de detecção de passos.
 
@@ -83,6 +81,8 @@ Depois de alguns testes, nosso algoritmo adquiriu a seguinte cara:
 5. Quando um passo é confirmado, incrementa o contador e envia um POST para o servidor com o valor 1
 
 6. O número total de passos é atualizado no display do ESP32
+
+O código utilizado no ESP32C3 está em [Aplicacao/captacao_de_passos](../Aplicacao/captacao_de_passos/captacao_de_passos.ino)
 
 ## ⚙️ Backend
 O Backend foi feito em Python com o uso da biblioteca Flask, permitindo criação de endpoint HTTP. O ESP32 se comunica com o backend enviando os passos do animal a cada 30s, e o aplicativo se comunica também com esse backend, recebendo os passos diários do animal e gerando gráficos e informações úteis ao dono do pet.  
@@ -208,7 +208,7 @@ Como melhoria futura, sugere-se a melhoria/implementação de:
 
 ## 📒 Pesquisas individuais
 - [Anotações do Willian](https://docs.google.com/document/d/1L0mPsEgcZPG29M-nSPczp4rMd2Pr4x98OYEAvyfv0Eg/edit?usp=sharing)
-- [Anotações da Stefanie](https://github.com/stepalmeira)
+- [Anotações da Stefanie](https://docs.google.com/document/d/1qXdrFPSAVbNhce4oOud9ZwHq1ynylDBD7qsRZsj1unE/edit?usp=sharing)
 - [Anotações do Arthur](https://docs.google.com/document/d/17O6CZThYMCn8GwaPOuoTraIOa0sEShhfARCrMZcj9_8/edit?usp=sharing)
 - [Anotações do Gabriel](https://docs.google.com/document/d/1JIy1R8I9HfKGUwXwEe_GVcWvw83TuC-qe8YNm9TS3fU/edit?usp=sharing)
 
