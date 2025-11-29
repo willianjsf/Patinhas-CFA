@@ -1,44 +1,74 @@
-# 🐾 Projeto Patinhas - Computação Física e Aplicações
+# 🐾 Projeto Patinhas
 
-Repositório público para os integrantes do grupo da disciplina de Computação Física e Aplicações (2025) - EACH USP.
+Repositório público para apresentação do projeto desenvolvido por alunos do curso de Sistemas de Informação na disciplina Computação Física e Aplicações (2025) na EACH-USP com orientação do professor doutor [Fábio Nakano](https://github.com/FNakano/CFA).
 
 ## ✏️ Resumo do projeto
 
-Acessório de coleira que mede o nível de atividade física de um pet. A ideia é registrar o número de passos do pet e enviar esses dados a um aplicativo mobile, onde o tutor poderá acompanhar o nível de atividade física do pet durante o dia. Ao virar do dia, a contagem reseta. Os dados sobre passos ficarão salvos em uma base de dados e poderão ser usados para criar gráficos sobre a atividade do pet.
+Acessório de coleira que conta os passos do pet e envia essas informações para um app mobile. O tutor acompanha a atividade física diária do animal, com a contagem sendo reiniciada a cada dia. Os dados ficam armazenados em uma base para geração de gráficos e histórico de atividade.
 
-Ilustração de exemplo:
 
-![Imagem da tela inicial do app](Relatorios/imagens/patinhas0.png)
+![Capa](Relatorios/imagens/capa.png)
 
 
 ## 🔧 Componentes
 
 - Placa microcontroladora ESP32-C3 Super Mini OLED Display de 0.42''
 - Módulo MPU-9250/6500: Este módulo contém um sensor acelerômetro de 3 eixos, um giroscópio de 3 eixos e um magnetômetro de 3 eixos
-- Fonte de energia (bateria)
+- Módulo para carregamento de bateria 
+- Bateria Li-po 3.7V 300mAh
+![Circuito](Relatorios/imagens/circuito_resultado.png)
 
+##  🐕‍🦺 Como o algoritmo detecta passos
 
-## 🚀 Funcionamento
+**1. Leitura de sensores**
+- Lê aceleração nos 3 eixos e calcula sua magnitude
+- Lê também o giroscópio para detectar rotações bruscas
 
-1. O sensor acelerômetro capta a aceleração em três dimensões (X, Y, Z)
-2. O algoritmo de detecção de passos:
-   - Calcula a magnitude da aceleração nos três eixos
-   - Mantém um buffer circular dos valores recentes
-   - Detecta um passo quando o movimento excede a média + limite estabelecido
-   - Usa lógica de temporizador para prevenir contagem duplicada de passos
-4. Contagem de passos é mostrada no display do ESP32-C3 e guardada em memória flash periodicamente 
-5. Ao conectar-se ao Wi-fi, o último valor captado é enviado para um banco de dados em nuvem
-6. O aplicativo acessa esses dados e os exibe ao tutor
-7. Ao final do dia a contagem de passos é resetada
+**2. Filtro de média móvel**
+- A magnitude da aceleração passa por um filtro simples que suaviza ruídos e vibrações rápidas
+   
+**3. Detecção de rotação**
+- Se o pet faz uma movimentação muito brusca (rotação alta), o algoritmo entra em cooldown e ignora possíveis “falsos passos”
+
+**4. Máquina de estados para detectar passos**
+- O algoritmo procura primeiro um pico de aceleração (indicando o início do passo)
+- Depois espera a volta ao nível de repouso (vale), confirmando que o passo foi completo
+- Também verifica tempo mínimo entre passos e timeout para evitar falsos positivos
+
+**5. Contagem e envio**
+- Quando um passo é confirmado, incrementa o contador e envia um POST para o servidor com o valor 1
+
+**6. Display**
+- O número total de passos é atualizado no display do ESP32
+
+## 📱 Aplicativo mobile
+O app (React) consome uma API fornecida por um backend em Python, que funciona como ponte entre o ESP32 e o aplicativo. O ESP32 detecta passos, encontra o servidor automaticamente via UDP Broadcast e envia os dados em POSTs periódicos. O backend (Flask) recebe esses passos, armazena o histórico e disponibiliza os valores via HTTP para o app, que atualiza as informações do pet em quase tempo real.
+Para usar o sistema, basta rodar o server.py localmente (na mesma rede do ESP32 e do celular) e abrir o app do repositório.
 
 
 ## 📦 Dependências de software
 
+#### Dispositivo físico
+
 - Arduino IDE
-- Bibliotecas:
-  -  [MPU9250 por hideakitai](https://github.com/hideakitai/MPU9250)
-  -  (...)
+- Bibliotecas externas:
+  -  [MPU9250 por hideakitai](https://github.com/hideakitai/MPU9250) (Comunicação com MPU9250)
+  -  [U8g2lib por olikraus](https://github.com/olikraus/u8g2) (Comunicação com display)
+
+#### Backend
+- Python
+- Flask 
+- Zeroconf
   
+#### Frontend
+- Node.js
+- Expo
+- React Native
+- TypeScript
+
+## 🚀 Demonstração
+![Imagem da tela inicial do app](Relatorios/imagens/teste_real.gif)
+
  
 ## 🗣️ Dúvidas e Ajuda
 
@@ -49,8 +79,8 @@ Incentivamos que você nos procure. **Abra uma Issue** na página de Issues cont
 ## 👨‍💻 Autores
  
 - [Arthur Hernandes](https://github.com/arthurHernandess)
-- Gabriel Kennuy
+- [Gabriel Kennuy](https://github.com/fosfro)
 - [Stefanie Palmeira](https://github.com/stepalmeira)
-- [Willian Jefferson Sousa Farias](https://github.com/willianjsf)
+- [Willian Farias](https://github.com/willianjsf)
 
 

@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/stefanie/Documentos/GitHub/Projeto Patinhas/Aplicacao/backend/venv/bin/python3" "$0" "$@"
-' '''
+#!/home/stefanie/Documentos/GitHub/Patinhas/Aplicacao/backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
