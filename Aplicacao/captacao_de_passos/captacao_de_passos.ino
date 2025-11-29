@@ -9,8 +9,8 @@
 
   // ========= CONFIGURAÇÕES DE REDE =========
   WiFiUDP udp;
-  const char* ssid = "Jeane"; 
-  const char* password = "tinhotinho7951";
+  const char* ssid = "sua_rede"; 
+  const char* password = "sua_senha";
 
   const int broadcastPort = 50000;
 
