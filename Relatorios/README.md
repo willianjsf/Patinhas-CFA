@@ -45,10 +45,12 @@ Para a construção do dispositivo físico de captação de passos, foram seleci
 <sup>Obs.: A bateria, o módulo de carregamento e a case foram reciclados de uma caixinha carregadora de fones de ouvido bluetooth</sup>
 
 Fizemos as seguintes conexões entre os componentes:
-![Circuito](imagens/circuito.png)
+<p align=center>
+  <img src="imagens/circuito.png"/>
+</p>
 
 Alguns ângulos do dispositivo já soldado:
-<p style="display: flex; justify-content:space-between">
+<p align=center style="display: flex; justify-content:space-between">
   <img src="imagens/angulo_1.jpeg" width="32%"/>
   <img src="imagens/angulo_2.jpeg" width="32%" />
   <img src="imagens/angulo_3.jpeg" width="32%" /> 
@@ -57,8 +59,9 @@ Alguns ângulos do dispositivo já soldado:
 
 Para proteger o circuito, o colocamos em um case e adicionamos uma pequena faixa de velcro, permitindo acoplamento a uma coleira:
 
-![Case](imagens/demonstracao_case.gif)
-
+<p align=center>
+  <img src="imagens/demonstracao_case.gif"/>
+</p>
 
 ## 🐾 Algoritmo de detecção de passos
 Um dos nosso primeiros desafios foi o de encontrar uma biblioteca compatível com o módulo acelerômetro MPU-9250. Depois de explorar algumas bibliotecas, encontramos a [MPU9250 de hideakitai no GitHub](https://github.com/hideakitai/MPU9250) e ela nos serviu perfeitamente para a visualizarmos os valores de aceleração e inclinação no monitor serial do Arduino IDE e a partir daí, pensarmos um algoritmo de detecção de passos.
@@ -121,13 +124,17 @@ Para utilizar o app e servidor é nescessario utilizar Python para rodar o scrip
 
 Ao longo da disciplina ganhamos do professor um cachorrinho de brinquedo (obrigada, Nakano! 😁) para testarmos nosso projeto. Entretanto, o brinquedo era programado para dar alguns passos e logo depois dar uma pirueta, o que não nos permitia testar o contador de passos adequadamente. Então, movidos pelo interesse de explorar outros componentes eletrônicos, nos propusemos a fazer modificações no brinquedo.
 
-![Cachorrinho](imagens/cachorrinho.jpeg)
+<p align=center>
+  <img src="imagens/cachorrinho.jpeg" width="70%"/>
+</p>
 
 ### Tentativa #1: Construir um esqueleto com palitos de picolé movimentado por um único motor DC
 Seguindo [esse tutorial no Youtube](https://www.youtube.com/shorts/SprH83cyU1A) montamos um esqueleto de quadrúpede andante usando um motor DC, suporte de pilha LilyPad, palitos de picolé, papelão, pequenos parafusos e porcas. Desistimos da ideia depois de alguns testes pois os desajustes mecânicos desequilibravam o esqueleto constantemente.  Infelizmente, esquecemos de registrar fotos deste protótipo 😢. Mas o seu movimento era bastante parecido com este:
 
-![Cachorrinho](imagens/tentativa_1_cachorro.gif)
- 
+<p align=center>
+  <img src="imagens/tentativa_1_cachorro.gif"/>
+</p>
+
 ### Tentativa #2: Construir um esqueleto com palitos de picolé movimentado por 4 servo motores
 Nossa segunda tentativa foi baseada [neste tutorial no Youtube](https://www.youtube.com/watch?v=KCTVP1tMOPA). 
 
